@@ -24,8 +24,11 @@ func (s Shape) countarea(channel chan float64) {
 
 func main() {
 	channelrectangle := make(chan float64)
+	defer close(channelrectangle)
 	channelcircle := make(chan float64)
+	defer close(channelcircle)
 	channeltriangle := make(chan float64)
+	defer close(channeltriangle)
 
 	var areaResult float64
 
@@ -52,9 +55,7 @@ func main() {
 		// fmt.Printf("Area from %s : %f\n", i.ShapeType, i.Area)
 		fmt.Printf("Area from %s : %.2f\n", i.ShapeType, areaResult)
 	}
-
-	close(channelrectangle)
-	close(channeltriangle)
-	close(channelcircle)
+	
+	
 
 }
