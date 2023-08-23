@@ -17,28 +17,42 @@ func main() {
 	// assign new handler for user
 	handler := handler.MarvelHandler{Handler: db}
 
-	// router
+	// init router
 	router := httprouter.New()
 
+	// INVENTORY
 	// get heroes and villains
-	router.GET("/heroes",handler.HandlerHeroes)
-	router.GET("/villains",handler.HandlerVillains)
+	router.GET("/heroes",handler.HandleHeroes)
+	router.GET("/villains",handler.HandleVillains)
 
 	// task 1 get inventories
-	router.GET("/inventories",handler.HandlerInventories)
+	router.GET("/inventories",handler.HandleInventories)
 
 	// task 2 get inventory by param id
-	router.GET("/inventories/:id",handler.HandlerInventoryById)
+	router.GET("/inventories/:id",handler.HandleInventoryById)
 
 	// task 3 post inventories
-	router.POST("/inventories",handler.HandlerCreateInventories)
+	router.POST("/inventories",handler.HandleCreateInventories)
 	
 	// task 4 PUT /inventories/:id
-	router.PUT("/inventories/:id",handler.HandlerEditInventory)
+	router.PUT("/inventories/:id",handler.HandleEditInventory)
 
 	// task 5 DELETE /inventories/:id
-	router.DELETE("/inventories/:id",handler.HandlerDeleteInventory)
+	router.DELETE("/inventories/:id",handler.HandleDeleteInventory)
 
+
+	// CRIMINAL REPORT
+	// read
+	router.GET("/criminal_reports",handler.HandleViewReports)
+	
+	// create
+	router.POST("/criminal_reports",handler.HandleCreateReports)
+
+	// edit
+	router.PUT("/criminal_reports/:id",handler.HandleEditReport)
+	
+	// Delete
+	router.DELETE("/criminal_reports/:id",handler.HandleDeleteReport)
 
 
 	// run server
@@ -50,7 +64,6 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-
 }
 
 
