@@ -14,7 +14,7 @@ func StartServerCLI(port string) {
 	fmt.Println("")
 	go func (){
 		for {
-			fmt.Printf("Running server on port %s\n",port)
+			fmt.Println("Reply from localhost 8383: bytes=32 time=0ms TTL=56")
 			time.Sleep(time.Millisecond*1850)
 		}
 	}()
