@@ -19,9 +19,7 @@ func (h *MarvelHandler) HandleViewReports(w http.ResponseWriter, r *http.Request
 
 	rows,err := h.Handler.QueryContext(ctx,query)
 	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
-		json.NewEncoder(w).Encode(HandleMessage{Message: "Status Internal Server Error : db"})
-		log.Fatal(err)
+		InternalError(w,err)
 	}
 
 	var criminal_reports []entity.Criminal_report
@@ -31,9 +29,7 @@ func (h *MarvelHandler) HandleViewReports(w http.ResponseWriter, r *http.Request
 
 		err := rows.Scan(&criminal_report.ID,&criminal_report.Hero_id,&criminal_report.Villain_id,&criminal_report.Description,&criminal_report.Incident_time)
 		if err != nil {
-			w.WriteHeader(http.StatusInternalServerError)
-			json.NewEncoder(w).Encode(HandleMessage{Message: "Status Internal Server Error : db"})
-			log.Fatal(err)
+			InternalError(w,err)
 		}
 
 		criminal_reports = append(criminal_reports, criminal_report)
@@ -65,9 +61,7 @@ func (h *MarvelHandler) HandleCreateReports(w http.ResponseWriter, r *http.Reque
 
 		_,err := h.Handler.ExecContext(ctx,query,report.Hero_id,report.Villain_id,report.Description,report.Incident_time)
 		if err != nil {
-			w.WriteHeader(http.StatusInternalServerError)
-			json.NewEncoder(w).Encode(HandleMessage{Message: "Status Internal Server Error : db"})
-			log.Fatal(err)
+			InternalError(w,err)
 		}
 	}
 	w.WriteHeader(http.StatusCreated)
@@ -85,9 +79,7 @@ func (h *MarvelHandler) HandleEditReport(w http.ResponseWriter, r *http.Request,
 
 	rows,err := h.Handler.QueryContext(ctx,query,paramsId)
 	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
-		json.NewEncoder(w).Encode(HandleMessage{Message: "Status Internal Server Error : db"})
-		log.Fatal(err)
+		InternalError(w,err)
 	}
 
 	if !rows.Next(){
@@ -110,9 +102,7 @@ func (h *MarvelHandler) HandleEditReport(w http.ResponseWriter, r *http.Request,
 
 	_,err = h.Handler.ExecContext(ctx,query2,newReport.Hero_id,newReport.Villain_id,newReport.Description,newReport.Incident_time,paramsId)
 	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
-		json.NewEncoder(w).Encode(HandleMessage{Message: "Status Internal Server Error : db"})
-		log.Fatal(err)
+		InternalError(w,err)
 	}
 	
 	w.WriteHeader(http.StatusOK)
@@ -129,9 +119,7 @@ func (h *MarvelHandler) HandleDeleteReport(w http.ResponseWriter, r *http.Reques
 
 	_,err := h.Handler.QueryContext(ctx,query,paramsId)
 	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
-		json.NewEncoder(w).Encode(HandleMessage{Message: "Status Internal Server Error : db"})
-		log.Fatal(err)
+		InternalError(w,err)
 	}
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(HandleMessage{Message: "Success delete report"})
