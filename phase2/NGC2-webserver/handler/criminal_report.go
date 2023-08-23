@@ -115,9 +115,24 @@ func (h *MarvelHandler) HandleDeleteReport(w http.ResponseWriter, r *http.Reques
 	paramsId := p.ByName("id")
 
 	ctx := context.Background()
-	query := `DELETE FROM criminal_reports WHERE id = ?;`
 
-	_,err := h.Handler.QueryContext(ctx,query,paramsId)
+	query1 := `SELECT *
+	FROM criminal_reports WHERE id = ?;`
+
+	rows,err := h.Handler.QueryContext(ctx,query1,paramsId)
+	if err != nil {
+		InternalError(w,err)
+	}
+
+	if !rows.Next(){
+		w.WriteHeader(http.StatusNotFound)
+		json.NewEncoder(w).Encode(HandleMessage{Message: "Id not found"})
+		return
+	}
+
+	query2 := `DELETE FROM criminal_reports WHERE id = ?;`
+
+	_,err = h.Handler.QueryContext(ctx,query2,paramsId)
 	if err != nil {
 		InternalError(w,err)
 	}
