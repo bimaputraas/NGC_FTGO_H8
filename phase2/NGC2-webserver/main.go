@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"net/http"
+	"ngc2-webserver/cli"
 	"ngc2-webserver/config"
 	"ngc2-webserver/handler"
 
@@ -56,6 +57,7 @@ func main() {
 
 
 	// run server
+	cli.StartServerCLI("8383")
 	server := http.Server{
 		Addr: "localhost:8383",
 		Handler: router,
