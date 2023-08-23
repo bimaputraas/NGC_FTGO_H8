@@ -2,7 +2,6 @@ package handler
 
 import (
 	"encoding/json"
-	"log"
 	"net/http"
 )
 
@@ -10,8 +9,7 @@ type HandleMessage struct {
 	Message string
 }
 
-func InternalError(w http.ResponseWriter,err error) {
+func InternalError(w http.ResponseWriter) {
 	w.WriteHeader(http.StatusInternalServerError)
 	json.NewEncoder(w).Encode(HandleMessage{Message: "Status Internal Server Error"})
-	log.Fatal(err)
 }

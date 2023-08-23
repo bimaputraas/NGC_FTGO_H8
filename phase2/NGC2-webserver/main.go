@@ -11,7 +11,7 @@ import (
 )
 
 func main() {
-	// db mysql
+	// init db mysql
 	db := config.InitDatabase()
 	defer db.Close()
 
@@ -21,37 +21,29 @@ func main() {
 	// init router
 	router := httprouter.New()
 
-	// INVENTORY
-	// get heroes and villains
+	// HEROES AND VILLAINS
 	router.GET("/heroes",handler.HandleHeroes)
 	router.GET("/villains",handler.HandleVillains)
-
+	
+	// INVENTORY
 	// task 1 get inventories
 	router.GET("/inventories",handler.HandleInventories)
-
 	// task 2 get inventory by param id
 	router.GET("/inventories/:id",handler.HandleInventoryById)
-
 	// task 3 post inventories
 	router.POST("/inventories",handler.HandleCreateInventories)
-	
 	// task 4 PUT /inventories/:id
 	router.PUT("/inventories/:id",handler.HandleEditInventory)
-
 	// task 5 DELETE /inventories/:id
 	router.DELETE("/inventories/:id",handler.HandleDeleteInventory)
-
 
 	// CRIMINAL REPORT
 	// read
 	router.GET("/criminal_reports",handler.HandleViewReports)
-	
 	// create
 	router.POST("/criminal_reports",handler.HandleCreateReports)
-
 	// edit
 	router.PUT("/criminal_reports/:id",handler.HandleEditReport)
-	
 	// Delete
 	router.DELETE("/criminal_reports/:id",handler.HandleDeleteReport)
 

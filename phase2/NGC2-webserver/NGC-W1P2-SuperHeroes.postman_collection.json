@@ -29,6 +29,15 @@
 					"originalRequest": {
 						"method": "GET",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "http://localhost:8383/criminal_reports",
 							"protocol": "http",
@@ -134,6 +143,117 @@
 					],
 					"cookie": [],
 					"body": "[\n    {\n        \"id\": 1,\n        \"hero_id\": \"1\",\n        \"villain_id\": \"1\",\n        \"description\": \"Fighting in Bandung\",\n        \"incident_time\": \"2023-05-01\"\n    },\n    {\n        \"id\": 3,\n        \"hero_id\": \"3\",\n        \"villain_id\": \"1\",\n        \"description\": \"Fighting in Sumedang\",\n        \"incident_time\": \"2220-05-10\"\n    }\n]"
+				},
+				{
+					"name": "4-after_second_create",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8383/criminal_reports",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8383",
+							"path": [
+								"criminal_reports"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 23 Aug 2023 09:44:31 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "631"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 1,\n        \"hero_id\": \"1\",\n        \"villain_id\": \"1\",\n        \"description\": \"Fighting in Bandung\",\n        \"incident_time\": \"2023-05-01\"\n    },\n    {\n        \"id\": 3,\n        \"hero_id\": \"3\",\n        \"villain_id\": \"1\",\n        \"description\": \"Fighting in Sumedang\",\n        \"incident_time\": \"2220-05-10\"\n    },\n    {\n        \"id\": 4,\n        \"hero_id\": \"1\",\n        \"villain_id\": \"2\",\n        \"description\": \"Fighting in Cimahi\",\n        \"incident_time\": \"2023-05-01\"\n    },\n    {\n        \"id\": 5,\n        \"hero_id\": \"2\",\n        \"villain_id\": \"3\",\n        \"description\": \"Fighting in Jakarta\",\n        \"incident_time\": \"2023-05-01\"\n    },\n    {\n        \"id\": 6,\n        \"hero_id\": \"4\",\n        \"villain_id\": \"3\",\n        \"description\": \"Fighting in Cimahi\",\n        \"incident_time\": \"2023-05-01\"\n    },\n    {\n        \"id\": 7,\n        \"hero_id\": \"5\",\n        \"villain_id\": \"1\",\n        \"description\": \"Fighting in Jakarta\",\n        \"incident_time\": \"2023-05-01\"\n    }\n]"
+				},
+				{
+					"name": "5-after_second_edit",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8383/criminal_reports",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8383",
+							"path": [
+								"criminal_reports"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 23 Aug 2023 09:45:53 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "623"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 1,\n        \"hero_id\": \"4\",\n        \"villain_id\": \"4\",\n        \"description\": \"Second edit\",\n        \"incident_time\": \"2220-05-10\"\n    },\n    {\n        \"id\": 3,\n        \"hero_id\": \"3\",\n        \"villain_id\": \"1\",\n        \"description\": \"Fighting in Sumedang\",\n        \"incident_time\": \"2220-05-10\"\n    },\n    {\n        \"id\": 4,\n        \"hero_id\": \"1\",\n        \"villain_id\": \"2\",\n        \"description\": \"Fighting in Cimahi\",\n        \"incident_time\": \"2023-05-01\"\n    },\n    {\n        \"id\": 5,\n        \"hero_id\": \"2\",\n        \"villain_id\": \"3\",\n        \"description\": \"Fighting in Jakarta\",\n        \"incident_time\": \"2023-05-01\"\n    },\n    {\n        \"id\": 6,\n        \"hero_id\": \"4\",\n        \"villain_id\": \"3\",\n        \"description\": \"Fighting in Cimahi\",\n        \"incident_time\": \"2023-05-01\"\n    },\n    {\n        \"id\": 7,\n        \"hero_id\": \"5\",\n        \"villain_id\": \"1\",\n        \"description\": \"Fighting in Jakarta\",\n        \"incident_time\": \"2023-05-01\"\n    }\n]"
+				},
+				{
+					"name": "6-after_third_delete",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8383/criminal_reports",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8383",
+							"path": [
+								"criminal_reports"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 23 Aug 2023 09:52:31 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "517"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 1,\n        \"hero_id\": \"4\",\n        \"villain_id\": \"4\",\n        \"description\": \"Second edit\",\n        \"incident_time\": \"2220-05-10\"\n    },\n    {\n        \"id\": 4,\n        \"hero_id\": \"1\",\n        \"villain_id\": \"2\",\n        \"description\": \"Fighting in Cimahi\",\n        \"incident_time\": \"2023-05-01\"\n    },\n    {\n        \"id\": 5,\n        \"hero_id\": \"2\",\n        \"villain_id\": \"3\",\n        \"description\": \"Fighting in Jakarta\",\n        \"incident_time\": \"2023-05-01\"\n    },\n    {\n        \"id\": 6,\n        \"hero_id\": \"4\",\n        \"villain_id\": \"3\",\n        \"description\": \"Fighting in Cimahi\",\n        \"incident_time\": \"2023-05-01\"\n    },\n    {\n        \"id\": 7,\n        \"hero_id\": \"5\",\n        \"villain_id\": \"1\",\n        \"description\": \"Fighting in Jakarta\",\n        \"incident_time\": \"2023-05-01\"\n    }\n]"
 				}
 			]
 		},
@@ -144,7 +264,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "[\r\n    {\r\n        \"hero_id\": \"2\",\r\n        \"villain_id\": \"3\",\r\n        \"description\": \"Fighting in Cimahi\",\r\n        \"incident_time\": \"2023-05-01\"\r\n    },\r\n     {\r\n        \"hero_id\": \"1\",\r\n        \"villain_id\": \"4\",\r\n        \"description\": \"Fighting in Jakarta\",\r\n        \"incident_time\": \"2023-05-01\"\r\n    }\r\n]",
+					"raw": "[\r\n    {\r\n        \"hero_id\": \"1\",\r\n        \"villain_id\": \"2\",\r\n        \"description\": \"Fighting in Cimahi\",\r\n        \"incident_time\": \"2023-05-01\"\r\n    },\r\n     {\r\n        \"hero_id\": \"2\",\r\n        \"villain_id\": \"3\",\r\n        \"description\": \"Fighting in Jakarta\",\r\n        \"incident_time\": \"2023-05-01\"\r\n    },\r\n     {\r\n        \"hero_id\": \"4\",\r\n        \"villain_id\": \"3\",\r\n        \"description\": \"Fighting in Cimahi\",\r\n        \"incident_time\": \"2023-05-01\"\r\n    },\r\n     {\r\n        \"hero_id\": \"5\",\r\n        \"villain_id\": \"1\",\r\n        \"description\": \"Fighting in Jakarta\",\r\n        \"incident_time\": \"2023-05-01\"\r\n    }\r\n]",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -152,15 +272,14 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8383/criminal_reports/3",
+					"raw": "http://localhost:8383/criminal_reports",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8383",
 					"path": [
-						"criminal_reports",
-						"3"
+						"criminal_reports"
 					]
 				}
 			},
@@ -210,6 +329,52 @@
 					],
 					"cookie": [],
 					"body": "{\n    \"Message\": \"Success create reports\"\n}"
+				},
+				{
+					"name": "2-second_create",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n        \"hero_id\": \"1\",\r\n        \"villain_id\": \"2\",\r\n        \"description\": \"Fighting in Cimahi\",\r\n        \"incident_time\": \"2023-05-01\"\r\n    },\r\n     {\r\n        \"hero_id\": \"2\",\r\n        \"villain_id\": \"3\",\r\n        \"description\": \"Fighting in Jakarta\",\r\n        \"incident_time\": \"2023-05-01\"\r\n    },\r\n     {\r\n        \"hero_id\": \"4\",\r\n        \"villain_id\": \"3\",\r\n        \"description\": \"Fighting in Cimahi\",\r\n        \"incident_time\": \"2023-05-01\"\r\n    },\r\n     {\r\n        \"hero_id\": \"5\",\r\n        \"villain_id\": \"1\",\r\n        \"description\": \"Fighting in Jakarta\",\r\n        \"incident_time\": \"2023-05-01\"\r\n    }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8383/criminal_reports",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8383",
+							"path": [
+								"criminal_reports"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 23 Aug 2023 09:43:58 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "37"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"Message\": \"Success create reports\"\n}"
 				}
 			]
 		},
@@ -220,7 +385,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n        \"hero_id\": \"3\",\r\n        \"villain_id\": \"1\",\r\n        \"description\": \"Fighting in Sumedang\",\r\n        \"incident_time\": \"2220-05-10\"\r\n}",
+					"raw": "{\r\n        \"hero_id\": \"4\",\r\n        \"villain_id\": \"4\",\r\n        \"description\": \"Second edit\",\r\n        \"incident_time\": \"2220-05-10\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -228,7 +393,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8383/criminal_reports/3",
+					"raw": "http://localhost:8383/criminal_reports/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -236,7 +401,7 @@
 					"port": "8383",
 					"path": [
 						"criminal_reports",
-						"3"
+						"1"
 					]
 				}
 			},
@@ -287,14 +452,73 @@
 					],
 					"cookie": [],
 					"body": "{\n    \"Message\": \"Success update report\"\n}"
+				},
+				{
+					"name": "2-second_edit",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"hero_id\": \"4\",\r\n        \"villain_id\": \"4\",\r\n        \"description\": \"Second edit\",\r\n        \"incident_time\": \"2220-05-10\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8383/criminal_reports/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8383",
+							"path": [
+								"criminal_reports",
+								"1"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 23 Aug 2023 09:45:31 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "36"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"Message\": \"Success update report\"\n}"
 				}
 			]
 		},
 		{
 			"name": "delete-criminal_reports",
 			"request": {
-				"method": "GET",
-				"header": []
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8383/criminal_reports/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8383",
+					"path": [
+						"criminal_reports",
+						"3"
+					]
+				}
 			},
 			"response": [
 				{
@@ -326,6 +550,82 @@
 						{
 							"key": "Date",
 							"value": "Wed, 23 Aug 2023 08:24:33 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "36"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"Message\": \"Success delete report\"\n}"
+				},
+				{
+					"name": "2-second_delete",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8383/criminal_reports/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8383",
+							"path": [
+								"criminal_reports",
+								"3"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 23 Aug 2023 09:51:01 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "27"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"Message\": \"Id not found\"\n}"
+				},
+				{
+					"name": "3-third_delete",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8383/criminal_reports/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8383",
+							"path": [
+								"criminal_reports",
+								"3"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 23 Aug 2023 09:51:41 GMT"
 						},
 						{
 							"key": "Content-Length",
