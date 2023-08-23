@@ -12,6 +12,6 @@ type HandleMessage struct {
 
 func InternalError(w http.ResponseWriter,err error) {
 	w.WriteHeader(http.StatusInternalServerError)
-	json.NewEncoder(w).Encode(HandleMessage{Message: "Status Internal Server Error : db"})
+	json.NewEncoder(w).Encode(HandleMessage{Message: "Status Internal Server Error"})
 	log.Fatal(err)
 }
