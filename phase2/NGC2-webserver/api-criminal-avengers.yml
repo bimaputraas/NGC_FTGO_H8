@@ -1,0 +1,18 @@
+openapi: '3.0.2'
+info:
+  title: 'Avenger Criminal Reports API'
+  description: 'API Documentation for Avenger Criminal Data Center'
+  version: '1.0'
+  contact:
+    name: 'Tony Stark'
+    email: 'tony@avenger.com'
+servers:
+  - url: 'http://localhost:8383'
+paths:
+  /criminal_reports:
+    get:
+      summary: 'Get all criminal reports'
+      description: 'Get all criminal reports in database'
+      responses:
+        '200':
+          description: OK
