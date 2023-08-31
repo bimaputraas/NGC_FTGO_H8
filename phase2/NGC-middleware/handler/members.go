@@ -2,28 +2,43 @@ package handler
 
 import (
 	"context"
+	"database/sql"
 	"encoding/json"
 	"net/http"
 	"ngc5-p2/entity"
 	"ngc5-p2/helper"
 
+	"github.com/golang-jwt/jwt/v5"
 	"github.com/julienschmidt/httprouter"
 )
+type MemberHandler struct {
+	HandlerDB *sql.DB
+}
 
 // Create a new member
-func (h Handler) Register(w http.ResponseWriter, r *http.Request, p httprouter.Params){
+func (h MemberHandler) Register(w http.ResponseWriter, r *http.Request, p httprouter.Params){
 	// decode
 	var newMember entity.Members
-	err := json.NewDecoder(r.Body).Decode(&newMember)
+	json.NewDecoder(r.Body).Decode(&newMember)
+	
+	// check email if already exist
+	ctx := context.Background()
+	query1 := `SELECT * FROM members WHERE email = ?`
+	row,err := h.HandlerDB.QueryContext(ctx,query1,newMember.Email)
 	if err != nil {
-		WriteResponse(w,400,"Invalid input")
+		InternalErrorResponse(w,err)
+		return
+	}
+	if row.Next(){
+		WriteResponse(w,400,"Email already exist, please try again")
 		return
 	}
 
 	// validate
 	err = helper.Validate(newMember)
 	if err != nil {
-		WriteResponse(w,400,err)
+		WriteResponse(w,400,err.Error())
+		return
 	}
 
 	// hashing password
@@ -33,9 +48,8 @@ func (h Handler) Register(w http.ResponseWriter, r *http.Request, p httprouter.P
 		return
 	}
 
-	ctx := context.Background()
-	query := `INSERT INTO members(email,password,fullname,age,occupation,role) VALUES(?,?,?,?,?,?);`
-	_,err = h.HandlerDB.ExecContext(ctx,query,newMember.Email,hashedPassword,newMember.Fullname,newMember.Age,newMember.Occupation,newMember.Role)
+	query2 := `INSERT INTO members(email,password,fullname,age,occupation,role) VALUES(?,?,?,?,?,?);`
+	_,err = h.HandlerDB.ExecContext(ctx,query2,newMember.Email,hashedPassword,newMember.Fullname,newMember.Age,newMember.Occupation,newMember.Role)
 	if err != nil {
 		InternalErrorResponse(w,err)
 		return
@@ -46,7 +60,7 @@ func (h Handler) Register(w http.ResponseWriter, r *http.Request, p httprouter.P
 }
 
 // Login
-func (h Handler) Login(w http.ResponseWriter, r *http.Request, p httprouter.Params){
+func (h MemberHandler) Login(w http.ResponseWriter, r *http.Request, p httprouter.Params){
 	// decode
 	var requestLogin entity.Members
 	err := json.NewDecoder(r.Body).Decode(&requestLogin)
@@ -55,33 +69,47 @@ func (h Handler) Login(w http.ResponseWriter, r *http.Request, p httprouter.Para
 		return
 	}
 
-	// get email and password from db
+	// get data from db
 	ctx := context.Background()
-	query := `SELECT password FROM members WHERE email = ?`
+	query := `SELECT id,password FROM members WHERE email = ?`
 	row,err := h.HandlerDB.QueryContext(ctx,query,requestLogin.Email)
 	if err != nil {
 		InternalErrorResponse(w,err)
 		return
 	}
 	if !row.Next(){
-		WriteResponse(w,400,"Wrong email or password, please try again")
+		WriteResponse(w,400,"Wrong email or password, please try again ")
 		return
 	}
 
-	// compare hashed password and plain password
-	var plainPassword string
-	err = row.Scan(&plainPassword)
+	// get id and password member from DB
+	var member entity.Members
+	err = row.Scan(&member.Id,&member.Password)
 	if err != nil {
 		InternalErrorResponse(w,err)
 		return
 	}
-	err = helper.CheckPasswordHash(plainPassword,requestLogin.Password)
+
+	// compare hashed password and plain password
+	err = helper.CheckPasswordHash(requestLogin.Password,member.Password)
 	if err != nil {
-		WriteResponse(w,400,"Wrong email or password, please try again")
+		WriteResponse(w,400,"Wrong email or password, please try again ")
+		return
+	}
+
+	// generate token
+	token,err := helper.GenerateToken(jwt.MapClaims{
+		"userId": member.Id,
+	})
+	if err != nil {
+		InternalErrorResponse(w,err)
 		return
 	}
 
 	// 201 created
-	WriteResponse(w,200,"Login success!")
+	WriteResponse(w,200,map[string]string{
+		"Message": "Login Success",
+		"Token" : token,
+	})
 }
 
