@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"fmt"
 	"net/http"
 	"ngc-cms/entity"
 	"ngc-cms/helper"
@@ -15,6 +16,21 @@ type UserHandler struct {
 	Handler repository.UserQuery
 }
 
+// @BasePath /api/v1
+
+// Register User godoc
+// @Summary Register user
+// @Description do Register user
+// @ID Create-users
+// @Accept json
+// @Produce json
+// @Created 201 {object} utils.SuccessWithData
+// @InternalError 500 {object} utils.APIErrors
+// @BindingError 400 {object} utils.APIErrors
+// @DuplicateError 400 {object} utils.APIErrors
+// @InsertError 400 {object} utils.APIErrors
+// @GetError 400 {object} utils.APIErrors
+// @Router /users/register/ [post]
 func (h UserHandler) Register(c *gin.Context) {
 	// bind request json
 	var reqStore entity.Store
@@ -48,6 +64,16 @@ func (h UserHandler) Register(c *gin.Context) {
 	utils.SuccessWithData(c,http.StatusCreated,newStore)
 }
 
+// View all User godoc
+// @Summary View all user
+// @Description do view all user
+// @ID Viewall-users
+// @Accept json
+// @Produce json
+// @Success 200 {object} utils.SuccessWithData
+// @InternalError 500 {object} utils.APIErrors
+// @GetError 400 {object} utils.APIErrors
+// @Router /users/ [get]
 func (h UserHandler) ViewAll(c *gin.Context) {
 	stores,err := h.Handler.FindAll()
 	if err != nil {
@@ -58,6 +84,17 @@ func (h UserHandler) ViewAll(c *gin.Context) {
 	utils.SuccessWithData(c,http.StatusCreated,stores)
 }
 
+// View all user by id godoc
+// @Summary View all userby id 
+// @Description do view all user by id
+// @ID Viewall-users
+// @Accept json
+// @Produce json
+// @Param id path int true "Users ID"
+// @Success 200 {object} utils.SuccessWithData
+// @InternalError 500 {object} utils.APIErrors
+// @GetError 400 {object} utils.APIErrors
+// @Router /users/{id} [get]
 func (h UserHandler) View(c *gin.Context) {
 	idStr := c.Param("id")
 	id,err := strconv.Atoi(idStr)
@@ -75,17 +112,26 @@ func (h UserHandler) View(c *gin.Context) {
 	utils.SuccessWithData(c,http.StatusOK,store)
 }
 
-// func (h UserHandler) Login(c *gin.Context) {
-// 	// fmt.Fprint(c.Writer,"masuk login")
-// 	var store entity.Store
-// 	err := c.ShouldBindJSON(&store)
-// 	if err != nil {
-// 		c.JSON(http.StatusBadRequest,gin.H{
-// 			"Message":"Failed",
-// 			"Detail":err,
-// 		})
-// 		return
-// 	}
+func (h UserHandler) Login(c *gin.Context) {
+	var logStore entity.Store
+	err := c.ShouldBindJSON(&logStore)
+	if err != nil {
+		utils.ErrorMessage(c,&utils.ErrBindingJSON)
+		return
+	}
+	
+	dbStore,err := h.Handler.FindbyEmail(logStore.Email)
+	if err != nil {
+		utils.ErrorMessage(c,&utils.ErrGetData)
+	}
+
+	if !helper.CheckPasswordHash(logStore.Password,dbStore.Password){
+		fmt.Fprint(c.Writer, "Wrong password or email")
+	}
+
+	utils.SuccessWithData(c,http.StatusOK,"Success Login")
+
+}
 
 // 	storeDb := h.Handler.FindbyEmail(store.Email)
 

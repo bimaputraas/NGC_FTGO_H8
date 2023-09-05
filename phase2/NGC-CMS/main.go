@@ -6,6 +6,9 @@ import (
 	"ngc-cms/repository"
 
 	"github.com/gin-gonic/gin"
+	swaggerfiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
+	"github.com/swaggo/swag/example/override/docs"
 )
 
 func main() {
@@ -19,9 +22,21 @@ func main() {
 
 	// gin
   	r := gin.Default()
-	r.GET("/users",userHandler.ViewAll)
-	r.GET("/users/:id",userHandler.View)
-	r.POST("/users/register",userHandler.Register)
   	
+	// swagger and router
+	v1 := r.Group("/v1")
+	{
+		usersGroup := v1.Group("/users")
+		{
+			usersGroup.GET("/",userHandler.ViewAll)
+			usersGroup.GET("/:id",userHandler.View)
+			usersGroup.POST("/register",userHandler.Register)
+			usersGroup.POST("/login",userHandler.Login)
+			// usersGroup.POST("/login",userHandler.Login)
+		}
+	}
+	docs.SwaggerInfo.BasePath = "/v1"
+	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
+	
   	r.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 }
