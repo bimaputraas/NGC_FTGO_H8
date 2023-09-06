@@ -17,7 +17,7 @@ func (h StoreHandler) View(c echo.Context) error {
 	user := c.Get("user").(models.Users)
 
 	var stores []models.Stores
-	result := h.DB.Find(&stores)
+	result := h.DB.Preload("StoreDetails").Find(&stores)
 	if result.Error != nil {
 		helpers.WriteResponse(c, 500, result.Error.Error())
 		return nil
@@ -25,6 +25,10 @@ func (h StoreHandler) View(c echo.Context) error {
 	if result.RowsAffected == 0 {
 		helpers.WriteResponse(c, 500, "Data does not exist")
 		return nil
+	}
+
+	for i:=0;i<len(stores);i++{
+		stores[i].StoreDetails.Weather = GetWeather(stores[i].Address)
 	}
 
 	helpers.WriteResponseWithData(c, 200, "logged in user "+user.Username, stores)
@@ -50,8 +54,7 @@ func (h StoreHandler) ViewById(c echo.Context) error {
 		return nil
 	}
 
-	weather := GetWeather(store.Address)
-	store.StoreDetails.Weather = weather
+	store.StoreDetails.Weather = GetWeather(store.Address)
 	
 	helpers.WriteResponseWithData(c, 200, "logged in user "+user.Username, store)
 	return nil
