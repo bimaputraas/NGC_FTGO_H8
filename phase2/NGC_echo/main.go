@@ -26,6 +26,9 @@ func main() {
 	transactionHandler := handlers.TransactionsHandler{
 		DB: db,
 	}
+	storeHandler := handlers.StoreHandler{
+		DB: db,
+	}
 
 	// routing
 	e := echo.New()
@@ -40,6 +43,10 @@ func main() {
 
 	// transaction
 	e.POST("/transactions",middleware.Authentication(transactionHandler.Buy))
+
+	// store
+	e.GET("/store",middleware.Authentication(storeHandler.View))
+	e.GET("/store/:id",middleware.Authentication(storeHandler.ViewById))
 	
     e.Logger.Fatal(e.Start(":8080"))
 }

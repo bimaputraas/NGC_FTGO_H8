@@ -82,7 +82,7 @@ func (h TransactionsHandler) Buy(c echo.Context) error {
 
 	// success purchase
 	tx.Commit()
-	message := fmt.Sprintf("%s successfully purchased '%s'", user.Username,product.Name)
+	message := fmt.Sprintf("%s successfully purchased '%s' on store id %d", user.Username,product.Name,transaction.StoreID)
 	helpers.WriteResponseWithData(c, 201,message, transaction)
 
 	return nil

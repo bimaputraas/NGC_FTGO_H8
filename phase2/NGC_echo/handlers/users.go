@@ -94,8 +94,7 @@ func (h UsersHandler) Login(c echo.Context) error {
 	
 	// send to header response
 	c.Response().Header().Set("Authorization",tokenString)
-
-
+	
 	// response body
 	helpers.WriteResponseWithData(c,200,"Success login",user)
     return nil
