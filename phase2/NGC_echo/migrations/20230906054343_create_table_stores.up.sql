@@ -7,7 +7,6 @@ CREATE TABLE stores (
 CREATE TABLE store_details (
    ID SERIAL PRIMARY KEY,
    store_id INT,
-   weather VARCHAR(255),
    latitude FLOAT,
    longitude FLOAT,
    total_sales FLOAT,

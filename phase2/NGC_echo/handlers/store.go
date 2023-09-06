@@ -42,7 +42,7 @@ func (h StoreHandler) ViewById(c echo.Context) error {
 		return nil
 	}
 
-
+	
 	var store models.Stores
 	result := h.DB.Preload("StoreDetails").Find(&store,id)
 	if result.Error != nil {
@@ -50,6 +50,9 @@ func (h StoreHandler) ViewById(c echo.Context) error {
 		return nil
 	}
 
+	weather := GetWeather(store.Address)
+	store.StoreDetails.Weather = weather
+	
 	helpers.WriteResponseWithData(c, 200, "logged in user "+user.Username, store)
 	return nil
 }

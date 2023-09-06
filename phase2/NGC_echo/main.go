@@ -47,6 +47,9 @@ func main() {
 	// store
 	e.GET("/store",middleware.Authentication(storeHandler.View))
 	e.GET("/store/:id",middleware.Authentication(storeHandler.ViewById))
+
+	
+
 	
     e.Logger.Fatal(e.Start(":8080"))
 }
