@@ -48,6 +48,10 @@ func main() {
 	e.GET("/store",middleware.Authentication(storeHandler.View))
 	e.GET("/store/:id",middleware.Authentication(storeHandler.ViewById))
 
+	// websocket
+	e.Static("/", "../public")
+	e.GET("/ws", handlers.Hello)
+
 	
 
 	
