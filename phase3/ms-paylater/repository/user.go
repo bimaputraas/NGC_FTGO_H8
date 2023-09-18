@@ -25,3 +25,13 @@ func (r Repository) GetUserByEmail(email string) (*model.Users,error) {
 	}
 	return &user,nil
 }
+
+// for authentication user
+func (r Repository) GetUserById(id int) (*model.Users,error) {
+	var user model.Users
+	result := r.DB.First(&user,id)
+	if result.Error != nil{
+		return nil,result.Error
+	}
+	return &user,nil
+}
