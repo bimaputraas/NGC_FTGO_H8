@@ -68,15 +68,15 @@ func (h Handler) AddLoan(c echo.Context) error {
 
 func (h Handler) Withdraw(c echo.Context) error {
 
-	return helper.WriteResponse(c, 201, "Masuk post loan")
+	return helper.WriteResponse(c, 201, "Masuk post withdraw")
 }
 
 func (h Handler) ViewLimit(c echo.Context) error {
 
-	return helper.WriteResponse(c, 201, "Masuk post loan")
+	return helper.WriteResponse(c, 201, "Masuk get limit")
 }
 
 func (h Handler) Pay(c echo.Context) error {
 
-	return helper.WriteResponse(c, 201, "Masuk post loan")
+	return helper.WriteResponse(c, 201, "Masuk post pay")
 }
