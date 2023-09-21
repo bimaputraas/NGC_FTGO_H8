@@ -4,6 +4,7 @@ import (
 	"net/http"
 	"ngc2_p3/controller"
 	"ngc2_p3/repository"
+	"ngc2_p3/service"
 
 	"github.com/labstack/echo/v4"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -38,6 +39,9 @@ func NewEcho(db *mongo.Database) *echo.Echo{
 		// delete
 		employee.DELETE("/:id",controller.DeleteEmployee)
 	}
+
+	// run count employees scheduler
+	service.CountEmployeesScheduler(*repository)
 
 	return e
 }
